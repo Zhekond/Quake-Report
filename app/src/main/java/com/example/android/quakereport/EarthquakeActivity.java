@@ -95,6 +95,8 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
             }
         });
     }
+        mSwipeRefreshLayout.setRefreshing(false);
+
     }
 
 
@@ -110,7 +112,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
             @Override
             public void onRefresh() {
                 Toast.makeText(EarthquakeActivity.this,"onRefresh",Toast.LENGTH_SHORT).show();
-                mSwipeRefreshLayout.setRefreshing(false);
+                getLoaderManager().restartLoader(0,null,EarthquakeActivity.this);
             }
         });
 
