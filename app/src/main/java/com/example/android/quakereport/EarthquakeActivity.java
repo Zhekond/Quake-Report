@@ -26,6 +26,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -35,11 +36,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 
 public class EarthquakeActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Report>> {
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
     public static final String USGS_HTTP_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query";
@@ -102,6 +105,14 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         setContentView(R.layout.earthquake_activity);
         ListView earthquakeListView = (ListView) findViewById(R.id.list);
         earthquakeListView.setEmptyView(findViewById(R.id.noquakes));
+        mSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.container);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(EarthquakeActivity.this,"onRefresh",Toast.LENGTH_SHORT).show();
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 
