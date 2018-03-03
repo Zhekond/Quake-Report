@@ -14,6 +14,11 @@
      limitations under the License.
 -->
 <!-- Layout for a list of earthquakes -->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
 <android.support.v4.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container"
@@ -27,15 +32,17 @@
     android:divider="@null"
     android:layout_alignParentStart="true"
     android:layout_alignParentLeft="true"/>
+</android.support.v4.widget.SwipeRefreshLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/noquakes"
-        android:layout_centerInParent="true"/>
+        android:layout_gravity="center" />
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progBar"
         style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_centerInParent="true"/>
-</android.support.v4.widget.SwipeRefreshLayout>
+        android:layout_gravity="center"/>
+</FrameLayout>
