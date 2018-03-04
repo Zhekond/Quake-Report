@@ -129,7 +129,8 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
             progressBar.setVisibility(View.GONE);
             TextView emptyText = (TextView) findViewById(R.id.noquakes);
             emptyText.setText(R.string.no_internet);
-
+            mSwipeRefreshLayout.setVisibility(View.GONE);
+            //TODO add button on emptyview to reload
         }
     }
 
