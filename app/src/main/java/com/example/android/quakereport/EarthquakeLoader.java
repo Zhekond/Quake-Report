@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Created by Panda on 1/9/2018.
  */
 
-public class EarthquakeLoader extends AsyncTaskLoader<ArrayList<Report>> {
+public class EarthquakeLoader extends android.support.v4.content.AsyncTaskLoader<ArrayList<Report>> {
     ArrayList<String> urls = new ArrayList<>();
 //    public void onLoaderReset(Loader<Report> loader){
 //
