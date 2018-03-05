@@ -1,6 +1,6 @@
 package com.example.android.quakereport;
 
-
+//TODO Disable SwipeRefresh while not loaded and enable after
 
 import android.content.Intent;
 import android.content.SharedPreferences;
