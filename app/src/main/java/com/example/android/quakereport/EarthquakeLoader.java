@@ -14,20 +14,13 @@ import java.util.ArrayList;
 
 public class EarthquakeLoader extends android.support.v4.content.AsyncTaskLoader<ArrayList<Report>> {
     ArrayList<String> urls = new ArrayList<>();
-//    public void onLoaderReset(Loader<Report> loader){
-//
-//    }
-//    public void onLoadFinished(Loader<Report> loader, Report d){
-//
-//    }
+
     public EarthquakeLoader (Context context, String url){
         super(context);
         urls.add(url);
     }
     @Override
     public ArrayList<Report> loadInBackground(){
-//        if(urls.size()<1 || urls.get(0) == null)
-//            return null;
         Log.i(EarthquakeActivity.LOG_TAG,"loadInBackground() method");
         return Utils.fetchReportsData(urls.get(0));
     }
