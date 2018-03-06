@@ -23,6 +23,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 
 public class EarthquakeActivity extends AppCompatActivity {
@@ -35,11 +37,13 @@ public class EarthquakeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
         //TODO Check for internet connection here
-        Fragment initialFrag = new main_frag();
+//        Fragment initialFrag = new main_frag();
+        Fragment initialFrag = new empty_frag();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frag,initialFrag);
         fragmentTransaction.commit();
+
     }
 
     @Override
