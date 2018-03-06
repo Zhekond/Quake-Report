@@ -1,7 +1,11 @@
 package com.example.android.quakereport;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +19,17 @@ import android.widget.Toast;
 public class empty_frag extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
-        Toast.makeText(getActivity(),"Test Toast!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"Trying to connect...",Toast.LENGTH_SHORT).show();
+        if(checkInternet()){
+            Fragment initialFrag = new main_frag();
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frag,initialFrag);
+            fragmentTransaction.commit();
+        }
+        else{
+            Toast.makeText(getActivity(),"Still no internet :(",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -25,5 +39,9 @@ public class empty_frag extends Fragment implements View.OnClickListener {
         progressBar.setVisibility(View.GONE);
         v.setOnClickListener(this);
         return v;
+    }
+    private Boolean checkInternet(){
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
     }
 }
