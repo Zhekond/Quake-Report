@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 package com.example.android.quakereport;
-
+//TODO test crush on start with internet -> disable internet rotate screen
+//TODO Put strings in values
+//TODO Make emptyview if no results return with current preffs
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -25,9 +27,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
-
 
 public class EarthquakeActivity extends AppCompatActivity {
 
@@ -38,9 +37,11 @@ public class EarthquakeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
-        //TODO Check for internet connection here
-//        Fragment initialFrag = new main_frag();
-        Fragment initialFrag = new empty_frag();
+        Fragment initialFrag;
+        if(checkInternet())
+        initialFrag = new main_frag();
+        else
+            initialFrag = new empty_frag();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frag,initialFrag);
