@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 package com.example.android.quakereport;
-//TODO test crush on start with internet -> disable internet rotate screen
 //TODO Put strings in values
 //TODO Make emptyview if no results return with current preffs
 import android.content.Context;

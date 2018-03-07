@@ -1,7 +1,6 @@
 package com.example.android.quakereport;
 
-//TODO Disable SwipeRefresh while not loaded and enable after
-
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -29,13 +28,15 @@ import static com.example.android.quakereport.Utils.LOG_TAG;
 public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshListener,
         android.support.v4.app.LoaderManager.LoaderCallbacks<ArrayList<Report>> {
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    private ListView earthquakeListView;
+    private Activity myAc;
+
 
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<ArrayList<Report>> loader, ArrayList<Report> data) {
         if(data !=null&&!data.isEmpty()){
             //TODO Remove empty_frag here
-            ListView earthquakeListView = (ListView) getView().findViewById(R.id.list);
-            ReportAdapter myAdapter = new ReportAdapter(getActivity(), data);
+            ReportAdapter myAdapter = new ReportAdapter(myAc, data);
             earthquakeListView.setAdapter(myAdapter);
             earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -87,11 +88,18 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        earthquakeListView = (ListView) view.findViewById(R.id.list);
+        myAc = getActivity();
+        mSwipeRefreshLayout = (SwipeRefreshLayout)getView().findViewById(R.id.refresh);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getActivity().getSupportLoaderManager().initLoader(0,null,this);
-        mSwipeRefreshLayout = (SwipeRefreshLayout)getView().findViewById(R.id.refresh);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
     }
 
     @Override
@@ -100,7 +108,6 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
         getLoaderManager().restartLoader(0,null,this);
         mSwipeRefreshLayout.setEnabled(true);
         mSwipeRefreshLayout.setRefreshing(true);
-        //TODO Handle refresh
     }
 
 }
