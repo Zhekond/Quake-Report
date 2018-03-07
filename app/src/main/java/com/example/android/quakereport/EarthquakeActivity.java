@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 package com.example.android.quakereport;
-//TODO Put strings in values
+//TODO Fix bug when data is loaded but it dissapears on rotate
 //TODO Make emptyview if no results return with current preffs
 import android.content.Context;
 import android.content.Intent;

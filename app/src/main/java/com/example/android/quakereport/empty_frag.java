@@ -19,7 +19,7 @@ import android.widget.Toast;
 public class empty_frag extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
-        Toast.makeText(getActivity(),"Trying to connect...",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),R.string.connect_try,Toast.LENGTH_SHORT).show();
         if(checkInternet()){
             Fragment initialFrag = new main_frag();
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -28,7 +28,7 @@ public class empty_frag extends Fragment implements View.OnClickListener {
             fragmentTransaction.commit();
         }
         else{
-            Toast.makeText(getActivity(),"Still no internet :(",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),R.string.still_no_internet,Toast.LENGTH_SHORT).show();
         }
     }
 

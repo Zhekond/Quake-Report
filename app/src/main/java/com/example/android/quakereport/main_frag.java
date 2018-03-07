@@ -35,7 +35,6 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<ArrayList<Report>> loader, ArrayList<Report> data) {
         if(data !=null&&!data.isEmpty()){
-            //TODO Remove empty_frag here
             ReportAdapter myAdapter = new ReportAdapter(myAc, data);
             earthquakeListView.setAdapter(myAdapter);
             earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -104,7 +103,7 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
 
     @Override
     public void onRefresh() {
-        Toast.makeText(getContext(),"OnRefresh!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),R.string.refreshed,Toast.LENGTH_SHORT).show();
         getLoaderManager().restartLoader(0,null,this);
         mSwipeRefreshLayout.setEnabled(true);
         mSwipeRefreshLayout.setRefreshing(true);
