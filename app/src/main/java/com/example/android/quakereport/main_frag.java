@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import android.view.LayoutInflater;
 
 import static com.example.android.quakereport.EarthquakeActivity.USGS_HTTP_URL;
-import static com.example.android.quakereport.Utils.LOG_TAG;
+//import static com.example.android.quakereport.Utils.LOG_TAG;
 
 /**
  * Created by Panda on 3/5/2018.
@@ -30,11 +31,13 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ListView earthquakeListView;
     private Activity myAc;
-
+private String LOG_TAG = "main_frag";
 
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<ArrayList<Report>> loader, ArrayList<Report> data) {
-        if(data !=null&&!data.isEmpty()){
+        Log.i(LOG_TAG, "onLoadFinished callback");
+//        if(!loader.isStarted()){
+        if (data != null && !data.isEmpty()) {
             ReportAdapter myAdapter = new ReportAdapter(myAc, data);
             earthquakeListView.setAdapter(myAdapter);
             earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -50,6 +53,7 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
             });
         }
         mSwipeRefreshLayout.setRefreshing(false);
+//    }
     }
 
     @Override
@@ -60,7 +64,7 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
 
     @Override
     public android.support.v4.content.Loader<ArrayList<Report>> onCreateLoader(int id, Bundle args) {
-
+        Log.i(LOG_TAG,"onCreateLoader callback");
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String minMagnitude = sharedPrefs.getString(getString(R.string.settings_min_magnitude_key),
                 getString(R.string.settings_min_magnitude_default));
@@ -91,13 +95,15 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
         super.onViewCreated(view, savedInstanceState);
         earthquakeListView = (ListView) view.findViewById(R.id.list);
         myAc = getActivity();
-        mSwipeRefreshLayout = (SwipeRefreshLayout)getView().findViewById(R.id.refresh);
+        mSwipeRefreshLayout = (SwipeRefreshLayout)getView().findViewById(R.id.main_frag);
         mSwipeRefreshLayout.setOnRefreshListener(this);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+//        Loader myLoad = getActivity().getSupportLoaderManager().getLoader(0);
+//        if(myLoad == null);
         getActivity().getSupportLoaderManager().initLoader(0,null,this);
     }
 

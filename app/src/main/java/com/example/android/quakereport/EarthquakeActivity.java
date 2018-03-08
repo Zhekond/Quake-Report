@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 package com.example.android.quakereport;
-//TODO Fix bug when data is loaded but it dissapears on rotate
+//TODO handle refresh if data is loaded but no internet
 //TODO Make emptyview if no results return with current preffs
 import android.content.Context;
 import android.content.Intent;
@@ -37,14 +37,23 @@ public class EarthquakeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
         Fragment initialFrag;
-        if(checkInternet())
-        initialFrag = new main_frag();
-        else
+        main_frag test = (main_frag)getSupportFragmentManager().findFragmentByTag("myFragTag");
+        if(test != null){ //&& test.isVisible()){
+            //Do nothing
+        }else if(checkInternet()) {
+            initialFrag = new main_frag();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frag,initialFrag,"myFragTag");
+            fragmentTransaction.commit();
+        } else {
             initialFrag = new empty_frag();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frag,initialFrag);
-        fragmentTransaction.commit();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frag,initialFrag);
+            fragmentTransaction.commit();
+        }
+
 
     }
 
