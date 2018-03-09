@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 package com.example.android.quakereport;
-//TODO Make emptyview if no results return with current preffs
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -37,7 +36,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         setContentView(R.layout.earthquake_activity);
         Fragment initialFrag;
         main_frag test = (main_frag)getSupportFragmentManager().findFragmentByTag("myFragTag");
-        if(test != null){ //&& test.isVisible()){
+        if(test != null){
             //Do nothing
         }else if(checkInternet()) {
             initialFrag = new main_frag();

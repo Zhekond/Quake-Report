@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +23,6 @@ import java.util.ArrayList;
 import android.view.LayoutInflater;
 
 import static com.example.android.quakereport.EarthquakeActivity.USGS_HTTP_URL;
-//import static com.example.android.quakereport.Utils.LOG_TAG;
 
 /**
  * Created by Panda on 3/5/2018.
@@ -43,10 +41,7 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
     public void onLoadFinished(android.support.v4.content.Loader<ArrayList<Report>> loader, ArrayList<Report> data) {
         Log.i(LOG_TAG, "onLoadFinished callback");
         progressBar.setVisibility(View.GONE);
-//        if(!loader.isStarted()){
-//        if(data.size()==0){
 
-//        }
         if (data != null && !data.isEmpty()) {
             ReportAdapter myAdapter = new ReportAdapter(myAc, data);
             earthquakeListView.setAdapter(myAdapter);
@@ -63,12 +58,10 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
             });
         }
         else{
-//            Toast.makeText(getContext(),"EmptyList",Toast.LENGTH_SHORT).show();
             emptyList.setVisibility(View.VISIBLE);
         }
 
         mSwipeRefreshLayout.setRefreshing(false);
-//    }
     }
 
     @Override
@@ -119,8 +112,7 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        Loader myLoad = getActivity().getSupportLoaderManager().getLoader(0);
-//        if(myLoad == null);
+
         getActivity().getSupportLoaderManager().initLoader(0,null,this);
     }
 
@@ -129,7 +121,6 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
         if(checkInternet()) {
             Toast.makeText(getContext(), R.string.refreshed, Toast.LENGTH_SHORT).show();
             getLoaderManager().restartLoader(0, null, this);
-//            mSwipeRefreshLayout.setEnabled(true);
             mSwipeRefreshLayout.setRefreshing(true);
         }else
         {
