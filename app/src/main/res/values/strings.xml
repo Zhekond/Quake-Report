@@ -32,4 +32,6 @@
     <string name="refreshed">Refreshed</string>
     <string name="connect_try">Trying to connect&#8230;</string>
     <string name="still_no_internet">Still no internet :(</string>
+    <string name="no_internet_icon_description">no_internet_icon</string>
+    <string name="empty_retry">No internet connection found :( \n Tap anywhere to retry!</string>
 </resources>

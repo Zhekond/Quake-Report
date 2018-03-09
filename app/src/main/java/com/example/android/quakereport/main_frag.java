@@ -1,5 +1,5 @@
 package com.example.android.quakereport;
-
+//TODO add progressBar when created and hide it in onLoadFinish
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

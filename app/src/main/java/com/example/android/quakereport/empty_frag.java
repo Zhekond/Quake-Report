@@ -35,8 +35,8 @@ public class empty_frag extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.empty_frag,container,false);
-        ProgressBar progressBar = (ProgressBar) v.findViewById(R.id.progBar);
-        progressBar.setVisibility(View.GONE);
+//        ProgressBar progressBar = (ProgressBar) v.findViewById(R.id.progBar);
+//        progressBar.setVisibility(View.GONE);
         v.setOnClickListener(this);
         return v;
     }
