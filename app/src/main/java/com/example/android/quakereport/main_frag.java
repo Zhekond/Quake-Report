@@ -1,5 +1,5 @@
 package com.example.android.quakereport;
-//TODO add progressBar when created and hide it in onLoadFinish
+//TODO fix bug when app paused with data loaded then when resumed and rotated data dissapears
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import java.util.ArrayList;
 import android.view.LayoutInflater;
@@ -33,11 +34,13 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ListView earthquakeListView;
     private Activity myAc;
-private String LOG_TAG = "main_frag";
+    private String LOG_TAG = "main_frag";
+    private ProgressBar progressBar;
 
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<ArrayList<Report>> loader, ArrayList<Report> data) {
         Log.i(LOG_TAG, "onLoadFinished callback");
+        progressBar.setVisibility(View.GONE);
 //        if(!loader.isStarted()){
         if (data != null && !data.isEmpty()) {
             ReportAdapter myAdapter = new ReportAdapter(myAc, data);
@@ -99,6 +102,7 @@ private String LOG_TAG = "main_frag";
         myAc = getActivity();
         mSwipeRefreshLayout = (SwipeRefreshLayout)getView().findViewById(R.id.main_frag);
         mSwipeRefreshLayout.setOnRefreshListener(this);
+        progressBar = (ProgressBar)getView().findViewById(R.id.progBar);
     }
 
     @Override

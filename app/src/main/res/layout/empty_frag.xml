@@ -12,12 +12,7 @@
         <!--android:layout_height="wrap_content"-->
         <!--android:id="@+id/noquakes"-->
         <!--android:layout_gravity="center" />-->
-    <!--<ProgressBar-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/progBar"-->
-        <!--style="@style/Widget.AppCompat.ProgressBar"-->
-        <!--android:layout_gravity="center"/>-->
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
