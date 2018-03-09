@@ -1,5 +1,7 @@
 package com.example.android.quakereport;
 //TODO fix bug when app paused with data loaded then when resumed and rotated data dissapears
+//TODO fix bug with emptyview apearing over the listview on resuming
+//listview data probably discarded when paused but it still visible before rotation(???)
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
