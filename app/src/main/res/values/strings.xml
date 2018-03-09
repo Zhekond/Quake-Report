@@ -34,4 +34,5 @@
     <string name="still_no_internet">Still no internet :(</string>
     <string name="no_internet_icon_description">no_internet_icon</string>
     <string name="empty_retry">No internet connection found :( \n Tap anywhere to retry!</string>
+    <string name="empty_list">Nothing found by your request, \n try changing your preferences</string>
 </resources>

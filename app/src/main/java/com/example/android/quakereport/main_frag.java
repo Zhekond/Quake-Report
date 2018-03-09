@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 import android.view.LayoutInflater;
@@ -36,12 +37,16 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
     private Activity myAc;
     private String LOG_TAG = "main_frag";
     private ProgressBar progressBar;
+    private TextView emptyList;
 
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<ArrayList<Report>> loader, ArrayList<Report> data) {
         Log.i(LOG_TAG, "onLoadFinished callback");
         progressBar.setVisibility(View.GONE);
 //        if(!loader.isStarted()){
+//        if(data.size()==0){
+
+//        }
         if (data != null && !data.isEmpty()) {
             ReportAdapter myAdapter = new ReportAdapter(myAc, data);
             earthquakeListView.setAdapter(myAdapter);
@@ -57,6 +62,11 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
                 }
             });
         }
+        else{
+//            Toast.makeText(getContext(),"EmptyList",Toast.LENGTH_SHORT).show();
+            emptyList.setVisibility(View.VISIBLE);
+        }
+
         mSwipeRefreshLayout.setRefreshing(false);
 //    }
     }
@@ -103,6 +113,7 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
         mSwipeRefreshLayout = (SwipeRefreshLayout)getView().findViewById(R.id.main_frag);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         progressBar = (ProgressBar)getView().findViewById(R.id.progBar);
+        emptyList = (TextView)getView().findViewById(R.id.empty_list);
     }
 
     @Override
