@@ -1,8 +1,10 @@
 package com.example.android.quakereport;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -109,10 +111,20 @@ private String LOG_TAG = "main_frag";
 
     @Override
     public void onRefresh() {
-        Toast.makeText(getContext(),R.string.refreshed,Toast.LENGTH_SHORT).show();
-        getLoaderManager().restartLoader(0,null,this);
-        mSwipeRefreshLayout.setEnabled(true);
-        mSwipeRefreshLayout.setRefreshing(true);
+        if(checkInternet()) {
+            Toast.makeText(getContext(), R.string.refreshed, Toast.LENGTH_SHORT).show();
+            getLoaderManager().restartLoader(0, null, this);
+//            mSwipeRefreshLayout.setEnabled(true);
+            mSwipeRefreshLayout.setRefreshing(true);
+        }else
+        {
+            mSwipeRefreshLayout.setRefreshing(false);
+            Toast.makeText(getContext(),R.string.no_internet,Toast.LENGTH_LONG).show();
+        }
+    }
+    private Boolean checkInternet(){
+        ConnectivityManager cm = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
     }
 
 }

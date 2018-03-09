@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 package com.example.android.quakereport;
-//TODO handle refresh if data is loaded but no internet
 //TODO Make emptyview if no results return with current preffs
 import android.content.Context;
 import android.content.Intent;
