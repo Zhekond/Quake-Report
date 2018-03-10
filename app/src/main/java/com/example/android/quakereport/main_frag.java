@@ -32,12 +32,25 @@ import static com.example.android.quakereport.EarthquakeActivity.USGS_HTTP_URL;
 
 public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshListener,
         android.support.v4.app.LoaderManager.LoaderCallbacks<ArrayList<Report>> {
+    private ArrayList<Report> myReports;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ListView earthquakeListView;
     private Activity myAc;
     private String LOG_TAG = "main_frag";
     private ProgressBar progressBar;
     private TextView emptyList;
+//TODO https://developer.android.com/reference/android/app/Fragment.html#setRetainInstance(boolean)
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+    public void setData (ArrayList<Report> data){
+        myReports=data;
+    }
+    public ArrayList<Report> getData(){
+        return myReports;
+    }
 
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<ArrayList<Report>> loader, ArrayList<Report> data) {
@@ -114,7 +127,7 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+//TODO check first if data(myReports) is created, if not -> initLoader
         getActivity().getSupportLoaderManager().initLoader(0,null,this);
     }
 
