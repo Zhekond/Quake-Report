@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
@@ -128,7 +129,15 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 //TODO check first if data(myReports) is created, if not -> initLoader
+//        if(savedInstanceState==null)
         getActivity().getSupportLoaderManager().initLoader(0,null,this);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 
     @Override
