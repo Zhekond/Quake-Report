@@ -1,5 +1,5 @@
 package com.example.android.quakereport;
-//TODO starts loading data when rotated from emptyView with internet
+//TODO add a cooldown for refreshes
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;

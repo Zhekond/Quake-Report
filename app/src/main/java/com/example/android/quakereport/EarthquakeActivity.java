@@ -35,10 +35,14 @@ public class EarthquakeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
         Fragment initialFrag;
-        main_frag test = (main_frag)getSupportFragmentManager().findFragmentByTag("myFragTag");
-        if(test != null){
+        main_frag main_test = (main_frag)getSupportFragmentManager().findFragmentByTag("myFragTag");
+        empty_frag empty_test = (empty_frag)getSupportFragmentManager().findFragmentByTag("myEmptyFragTag");
+        if(main_test != null){
             //Do nothing
-        }else if(checkInternet()) {
+        }
+        else if (empty_test != null){
+            //Do nothing
+        } else if(checkInternet()) {
             initialFrag = new main_frag();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -48,7 +52,7 @@ public class EarthquakeActivity extends AppCompatActivity {
             initialFrag = new empty_frag();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.frag,initialFrag);
+            fragmentTransaction.replace(R.id.frag,initialFrag,"myEmptyFragTag");
             fragmentTransaction.commit();
         }
 
@@ -75,5 +79,5 @@ public class EarthquakeActivity extends AppCompatActivity {
         ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
-    
+
 }
