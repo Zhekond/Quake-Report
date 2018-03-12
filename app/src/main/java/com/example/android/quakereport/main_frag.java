@@ -1,7 +1,5 @@
 package com.example.android.quakereport;
-//TODO fix bug when app paused with data loaded then when resumed and rotated data dissapears
-//TODO fix bug with emptyview apearing over the listview on resuming
-//listview data probably discarded when paused but it still visible before rotation(???)
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +10,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
@@ -33,25 +30,12 @@ import static com.example.android.quakereport.EarthquakeActivity.USGS_HTTP_URL;
 
 public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshListener,
         android.support.v4.app.LoaderManager.LoaderCallbacks<ArrayList<Report>> {
-    private ArrayList<Report> myReports;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ListView earthquakeListView;
     private Activity myAc;
     private String LOG_TAG = "main_frag";
     private ProgressBar progressBar;
     private TextView emptyList;
-//TODO https://developer.android.com/reference/android/app/Fragment.html#setRetainInstance(boolean)
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
-    public void setData (ArrayList<Report> data){
-        myReports=data;
-    }
-    public ArrayList<Report> getData(){
-        return myReports;
-    }
 
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<ArrayList<Report>> loader, ArrayList<Report> data) {
@@ -128,15 +112,8 @@ public class main_frag extends Fragment implements SwipeRefreshLayout.OnRefreshL
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//TODO check first if data(myReports) is created, if not -> initLoader
-//        if(savedInstanceState==null)
+
         getActivity().getSupportLoaderManager().initLoader(0,null,this);
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
 
     }
 

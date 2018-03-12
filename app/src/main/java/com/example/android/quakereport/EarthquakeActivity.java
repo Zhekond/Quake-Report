@@ -75,9 +75,5 @@ public class EarthquakeActivity extends AppCompatActivity {
         ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
+    
 }

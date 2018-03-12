@@ -1,11 +1,7 @@
 package com.example.android.quakereport;
 
-import android.app.LoaderManager;
-import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.content.Loader;
 import android.util.Log;
-
 import java.util.ArrayList;
 
 /**
@@ -30,7 +26,8 @@ public class EarthquakeLoader extends android.support.v4.content.AsyncTaskLoader
         return Utils.fetchReportsData(urls.get(0));
     }
     @Override
-    protected void onStartLoading(){
+    protected void onStartLoading(){/*Apparently this also gets called when resuming the app (and it has to create
+    frag to draw it), not only when you initLoader*/
         super.onStartLoading();
         Log.i(LOG_TAG,"onStartLoading() method");
         if(onContentChanged)
