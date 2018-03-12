@@ -1,8 +1,9 @@
 package com.example.android.quakereport;
-//TODO add a cooldown for refreshes
+
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,8 +17,22 @@ import android.widget.Toast;
  */
 
 public class empty_frag extends Fragment implements View.OnClickListener {
+    private View myView;
     @Override
     public void onClick(View view) {
+        myView = view;
+        //Handle spamming with touches by removing the listener
+        myView.setOnClickListener(null);
+        //Start cooldown
+        new CountDownTimer(5000,5000){
+            public void onTick(long millisUntilFinished){
+                //do nothing
+            }
+            public void onFinish(){
+                //Set listener back after cooldown
+                setThisListener();
+            }
+        }.start();
         Toast.makeText(getActivity(),R.string.connect_try,Toast.LENGTH_SHORT).show();
         if(checkInternet()){
             Fragment initialFrag = new main_frag();
@@ -29,6 +44,9 @@ public class empty_frag extends Fragment implements View.OnClickListener {
         else{
             Toast.makeText(getActivity(),R.string.still_no_internet,Toast.LENGTH_SHORT).show();
         }
+    }
+    private void setThisListener(){
+        myView.setOnClickListener(this);
     }
 
     @Override
